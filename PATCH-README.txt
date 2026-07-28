@@ -1,18 +1,24 @@
-FormatForge JSON Tools v0.5.0 - Array Inverse Hotfix
+FormatForge JSON Tools v0.6.0 — JSON Pointer (RFC 6901)
 
-Merge-safe patch. Replace only these files:
-- src/patch/patch.ts
-- tests/patch.test.ts
+Merge-safe patch for an existing v0.5.0 repository.
 
-Fixes:
-- invertPatch() no longer emits an invalid remove path ending in '/-' for array appends.
-- Array add/copy inverses now remove the inserted element at its concrete numeric index.
-- Array insertion inverses no longer incorrectly replace the previous array item.
-- Root add/copy inverse restores the original document.
-- Adds a regression test for numeric array insertion inversion.
+Added:
+- src/pointer/pointer.ts
+- src/pointer/index.ts
+- tests/pointer.test.ts
 
-After extraction, run:
-  npm run check
-  npm audit
+Updated:
+- src/index.ts
+- package.json
+- package-lock.json
+- README.md
+- CHANGELOG.md
 
-Expected test count: 63 tests.
+Apply:
+1. Extract this ZIP into the repository root.
+2. Replace matching files when prompted.
+3. Run: npm install
+4. Run: npm run check
+5. Run: npm audit
+
+The patch excludes .git, node_modules, and dist.

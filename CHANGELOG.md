@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [0.6.0] - 2026-07-28
+
+### Added
+
+- RFC 6901 JSON Pointer parsing, escaping, and unescaping.
+- `getPointer` and `hasPointer` for safe JSON value lookup.
+- Immutable `setPointer` and `removePointer` operations.
+- Array append support through the `-` token.
+- `listPointers` for enumerating escaped leaf and container paths.
+- `JsonPointerError` with pointer, token, and token-index context.
+- JSON Pointer tests covering objects, arrays, root values, escaping, immutability, malformed paths, and prototype safety.
+
 ## [0.5.0] - 2026-07-28
 
 ### Added
@@ -15,7 +29,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Support for add, remove, replace, move, copy, and test operations.
 - RFC 6901 JSON Pointer escaping and root-document operations.
 
-## [Unreleased]
 
 ## [0.4.0] - 2026-07-28
 
@@ -72,7 +85,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - ESM, CommonJS, source map, and declaration builds
 - Vitest test suite
 
-[Unreleased]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.5.0...v0.6.0
+[0.5.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.1.1...v0.2.0

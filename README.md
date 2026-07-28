@@ -17,6 +17,7 @@ Fast, lightweight TypeScript utilities for formatting, validating, and transform
 - Deep clone and merge JSON-compatible data without mutation
 - Recursively sort object keys while preserving array order
 - Remove configurable empty values from nested JSON
+- Read and immutably update JSON using RFC 6901 JSON Pointers
 - Choose indentation from 0 to 10 spaces
 - Recursively sort object keys while preserving array order
 - ESM and CommonJS builds
@@ -294,6 +295,37 @@ The package provides:
 - ESM: `dist/index.js`
 - CommonJS: `dist/index.cjs`
 - Type declarations: `dist/index.d.ts`
+
+
+### JSON Pointer (RFC 6901)
+
+Read, check, update, remove, and enumerate values with standards-based JSON Pointer paths. Mutating helpers return a new JSON value and do not modify the input.
+
+```ts
+import {
+  getPointer,
+  hasPointer,
+  listPointers,
+  removePointer,
+  setPointer
+} from "@formatforge/json-tools";
+
+const document = {
+  user: { name: "Ada" },
+  orders: [{ total: 25 }]
+};
+
+getPointer(document, "/user/name"); // "Ada"
+hasPointer(document, "/orders/0"); // true
+
+const updated = setPointer(document, "/user/name", "Grace");
+const appended = setPointer(updated, "/orders/-", { total: 50 });
+const cleaned = removePointer(appended, "/orders/0");
+
+listPointers(cleaned); // ["/user/name", "/orders/0/total"]
+```
+
+Use `escapePointer` and `unescapePointer` for property names containing `/` or `~`. The empty pointer (`""`) selects the root value.
 
 ## Development
 
