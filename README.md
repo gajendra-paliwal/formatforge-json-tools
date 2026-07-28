@@ -19,6 +19,7 @@ Fast, lightweight TypeScript utilities for formatting, validating, and transform
 - Remove configurable empty values from nested JSON
 - Read and immutably update JSON using RFC 6901 JSON Pointers
 - Query JSON using a safe, dependency-free JSONPath subset
+- Infer Draft 2020-12 JSON Schemas and validate JSON against a practical schema subset
 - Choose indentation from 0 to 10 spaces
 - Recursively sort object keys while preserving array order
 - ESM and CommonJS builds
@@ -327,6 +328,44 @@ listPointers(cleaned); // ["/user/name", "/orders/0/total"]
 ```
 
 Use `escapePointer` and `unescapePointer` for property names containing `/` or `~`. The empty pointer (`""`) selects the root value.
+
+## JSON Schema
+
+### `generateSchema(value, options?)`
+
+Generates a Draft 2020-12-compatible schema from JSON-compatible data. Object properties, required keys, nested arrays, mixed arrays, integers, numbers, strings, booleans, and null values are inferred.
+
+```ts
+import { generateSchema } from "@formatforge/json-tools";
+
+const schema = generateSchema(
+  { id: 1, name: "Asha", tags: ["json", "tools"] },
+  { title: "User", additionalProperties: false }
+);
+```
+
+Use `inferSchema()` when the `$schema` declaration is not needed. Set `required: false` to omit generated required lists.
+
+### `validateAgainstSchema(value, schema)`
+
+Validates JSON without throwing and returns `{ valid, errors }`. Error paths use RFC 6901 JSON Pointer notation.
+
+```ts
+import { validateAgainstSchema } from "@formatforge/json-tools";
+
+const result = validateAgainstSchema(
+  { id: "1" },
+  { type: "object", properties: { id: { type: "integer" } }, required: ["id"] }
+);
+
+if (!result.valid) console.log(result.errors);
+```
+
+The dependency-free validator supports types, properties, required, items, additionalProperties, enum, const, anyOf, allOf, oneOf, not, string constraints, numeric constraints, and array constraints. It is a practical subset rather than a complete implementation of every JSON Schema Draft 2020-12 keyword. `isValidAgainstSchema()` returns only a boolean.
+
+### `mergeSchemas(schemaA, schemaB)`
+
+Merges inferred schemas, combining types and object properties while retaining only required properties present in both object shapes.
 
 ## Development
 

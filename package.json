@@ -1,7 +1,7 @@
 {
   "name": "@formatforge/json-tools",
-  "version": "0.7.0",
-  "description": "Fast, lightweight TypeScript utilities for JSON formatting, validation, transformation, comparison, patching, pointers, and JSONPath queries.",
+  "version": "0.8.0",
+  "description": "Fast, lightweight TypeScript utilities for JSON formatting, validation, transformation, comparison, patching, pointers, JSONPath queries, and JSON Schema.",
   "keywords": [
     "json",
     "typescript",
@@ -18,7 +18,9 @@
     "json-patch",
     "rfc-6902",
     "json-pointer",
-    "jsonpath"
+    "jsonpath",
+    "json-schema",
+    "draft-2020-12"
   ],
   "license": "MIT",
   "author": "Gajendra Paliwal",

@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-07-28
+
+### Added
+
+- Draft 2020-12-compatible JSON Schema generation with `generateSchema`.
+- Metadata-free schema inference with `inferSchema`.
+- Dependency-free schema validation with structured RFC 6901 error paths.
+- Boolean validation through `isValidAgainstSchema`.
+- Schema merging for mixed arrays and evolving object shapes.
+- Support for core type, object, array, string, number, enum, const, and composition keywords.
+- JSON Schema tests covering inference, merging, nested validation, constraints, and generated schemas.
+
 ## [0.7.0] - 2026-07-28
 
 ### Added
@@ -96,7 +108,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - ESM, CommonJS, source map, and declaration builds
 - Vitest test suite
 
-[Unreleased]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.7.0...HEAD
+[Unreleased]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.4.0...v0.5.0
