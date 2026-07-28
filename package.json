@@ -32,7 +32,7 @@
   "homepage": "https://formatforge.in/tools/json-studio",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gajendra-paliwal/formatforge-json-tools.git"
+    "url": "git+https://github.com/gajendra-paliwal/formatforge-json-tools.git"
   },
   "bugs": {
     "url": "https://github.com/gajendra-paliwal/formatforge-json-tools/issues"
@@ -82,7 +82,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "provenance": true
+    "provenance": false
   },
   "packageManager": "npm@11",
   "allowScripts": {
