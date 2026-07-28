@@ -330,3 +330,20 @@ Please report security concerns according to [SECURITY.md](./SECURITY.md).
 ## License
 
 MIT © 2026 Gajendra Paliwal
+
+## JSON Patch
+
+Create and apply RFC 6902 patches:
+
+```ts
+import { applyPatch, createPatch, invertPatch } from "@formatforge/json-tools";
+
+const source = { name: "Alice", active: true };
+const target = { name: "Bob", age: 30 };
+
+const patch = createPatch(source, target);
+const changed = applyPatch(source, patch).document;
+const original = applyPatch(changed, invertPatch(source, patch)).document;
+```
+
+Supported operations: `add`, `remove`, `replace`, `move`, `copy`, and `test`. Paths follow RFC 6901 JSON Pointer syntax.

@@ -1,55 +1,18 @@
-FormatForge JSON Tools v0.4.0 — Compare & Diff Merge-Safe Patch
-================================================================
+FormatForge JSON Tools v0.5.0 - Array Inverse Hotfix
 
-Baseline: committed v0.3.0 release
+Merge-safe patch. Replace only these files:
+- src/patch/patch.ts
+- tests/patch.test.ts
 
-Copy this patch into the repository root and replace matching files.
-The patch does not contain .git, node_modules, or dist.
+Fixes:
+- invertPatch() no longer emits an invalid remove path ending in '/-' for array appends.
+- Array add/copy inverses now remove the inserted element at its concrete numeric index.
+- Array insertion inverses no longer incorrectly replace the previous array item.
+- Root add/copy inverse restores the original document.
+- Adds a regression test for numeric array insertion inversion.
 
-New APIs
---------
-- isDeepEqual(left, right)
-- diffJson(left, right, options?)
-- compareJson(left, right, options?)
-
-Highlights
-----------
-- Deterministic added, removed, and changed differences
-- RFC 6901 JSON Pointer paths
-- Correct escaping for '/' and '~' in property names
-- Object property order ignored
-- Array order preserved and compared
-- Root-value differences supported
-- Optional maxDifferences safety limit
-- Non-JSON and circular inputs rejected
-- Summary counts from compareJson
-
-Files added
------------
-- src/compare/compare.ts
-- src/compare/index.ts
-- tests/compare.test.ts
-
-Files updated
--------------
-- src/index.ts
-- package.json
-- package-lock.json
-- README.md
-- CHANGELOG.md
-
-Validation
-----------
-TypeScript compilation was checked successfully with:
-  tsc --noEmit
-
-Run locally after applying:
-  npm install
+After extraction, run:
   npm run check
   npm audit
 
-Expected:
-- 47 total tests (based on v0.3.0 baseline)
-- TypeScript pass
-- ESM/CJS/DTS build pass
-- 0 vulnerabilities
+Expected test count: 63 tests.

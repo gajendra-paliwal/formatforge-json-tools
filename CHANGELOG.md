@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-07-28
+
+### Added
+
+- RFC 6902 JSON Patch creation with `createPatch`.
+- Immutable patch application with `applyPatch`.
+- Patch structure validation with `validatePatch`.
+- Reversible patches with `invertPatch(document, patch)`.
+- Support for add, remove, replace, move, copy, and test operations.
+- RFC 6901 JSON Pointer escaping and root-document operations.
+
 ## [Unreleased]
 
 ## [0.4.0] - 2026-07-28
