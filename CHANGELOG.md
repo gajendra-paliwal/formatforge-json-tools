@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-07-28
+
+### Added
+
+- Deterministic JSON serialization with `stableStringify`.
+- Compact canonical output with `canonicalize`.
+- JSON-text normalization with `canonicalizeJson`.
+- Canonical-form detection with `isCanonicalJson`.
+- Numeric and string indentation compatible with JSON.stringify limits.
+- Custom object-key comparators while preserving array order.
+- `JsonCanonicalizationError` with precise value-path context.
+- Strict rejection of circular references, non-finite numbers, unsupported values, and non-plain objects.
+- Canonical serialization tests covering recursion, formatting, immutability, path reporting, repeated references, and malformed input.
+
 ## [0.8.0] - 2026-07-28
 
 ### Added
@@ -108,7 +122,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - ESM, CommonJS, source map, and declaration builds
 - Vitest test suite
 
-[Unreleased]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.8.0...HEAD
+[Unreleased]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.5.0...v0.6.0

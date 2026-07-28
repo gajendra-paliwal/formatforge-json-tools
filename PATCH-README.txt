@@ -1,33 +1,20 @@
-FormatForge JSON Tools v0.8.0 - JSON Schema Merge-Safe Patch
+FormatForge JSON Tools v0.9.0 - Deterministic & Canonical JSON
 
-Apply this patch while on the feature/json-schema branch.
-Extract into the repository root and replace matching files.
+Apply this archive to the repository root while on feature/canonical-json.
+Replace matching files, then run:
 
-Added:
-- generateSchema
-- inferSchema
-- validateAgainstSchema
-- isValidAgainstSchema
-- mergeSchemas
-- JSON Schema types and structured validation errors
-- Draft 2020-12 metaschema declaration for generated schemas
-- Core object, array, primitive, enum, const, composition, string,
-  numeric, and array constraint validation
-- JSON Schema test suite
-
-Updated:
-- src/index.ts
-- package.json and package-lock.json to v0.8.0
-- README.md
-- CHANGELOG.md
-
-Verification:
   npm install
   npm run check
   npm audit
 
-Notes:
-- Runtime remains dependency-free.
-- The validator intentionally implements a practical documented subset of
-  JSON Schema Draft 2020-12, not every keyword in the specification.
-- This archive excludes .git, node_modules, and dist.
+Added public APIs:
+- stableStringify
+- canonicalize
+- canonicalizeJson
+- isCanonicalJson
+- JsonCanonicalizationError
+
+The canonical form is deterministic and intended for comparisons, cache keys,
+and snapshots. It intentionally does not claim RFC 8785 JCS compliance.
+
+This merge-safe patch excludes .git, node_modules, and dist.

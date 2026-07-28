@@ -1,6 +1,6 @@
 # @formatforge/json-tools
 
-Fast, lightweight TypeScript utilities for formatting, validating, and transforming JSON in browsers and Node.js.
+Fast, lightweight TypeScript utilities for formatting, validating, transforming, querying, validating schemas, and deterministically serializing JSON in browsers and Node.js.
 
 [![CI](https://github.com/gajendra-paliwal/formatforge-json-tools/actions/workflows/ci.yml/badge.svg)](https://github.com/gajendra-paliwal/formatforge-json-tools/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/@formatforge/json-tools.svg)](https://www.npmjs.com/package/@formatforge/json-tools)
@@ -20,6 +20,8 @@ Fast, lightweight TypeScript utilities for formatting, validating, and transform
 - Read and immutably update JSON using RFC 6901 JSON Pointers
 - Query JSON using a safe, dependency-free JSONPath subset
 - Infer Draft 2020-12 JSON Schemas and validate JSON against a practical schema subset
+- Serialize JSON deterministically with recursively sorted object keys
+- Canonicalize JSON text for comparison, caching, and reproducible snapshots
 - Choose indentation from 0 to 10 spaces
 - Recursively sort object keys while preserving array order
 - ESM and CommonJS builds
@@ -366,6 +368,30 @@ The dependency-free validator supports types, properties, required, items, addit
 ### `mergeSchemas(schemaA, schemaB)`
 
 Merges inferred schemas, combining types and object properties while retaining only required properties present in both object shapes.
+
+### Deterministic and canonical JSON
+
+`stableStringify` recursively sorts object keys while preserving array order. It supports compact output, indentation, and custom key comparators.
+
+```ts
+import { canonicalize, canonicalizeJson, isCanonicalJson, stableStringify } from "@formatforge/json-tools";
+
+stableStringify({ z: 1, a: { y: 2, b: 3 } });
+// {"a":{"b":3,"y":2},"z":1}
+
+stableStringify({ b: 2, a: 1 }, { space: 2 });
+
+canonicalize({ b: 2, a: 1 });
+// {"a":1,"b":2}
+
+canonicalizeJson('{ "b": 2, "a": 1 }');
+// {"a":1,"b":2}
+
+isCanonicalJson('{"a":1,"b":2}');
+// true
+```
+
+The FormatForge canonical form is deterministic and useful for comparisons, cache keys, and snapshots. It is not an implementation of the RFC 8785 JSON Canonicalization Scheme. Unsupported values, non-finite numbers, non-plain objects, and circular references throw `JsonCanonicalizationError` with a value path.
 
 ## Development
 
