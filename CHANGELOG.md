@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-07-28
+
+### Added
+
+- Safe, dependency-free JSONPath query engine.
+- `query`, `first`, and `exists` helpers for value-oriented lookups.
+- `select` and `find` helpers returning matched values with RFC 6901 pointers.
+- Root, dot-property, quoted bracket-property, array-index, and wildcard selectors.
+- `parseJsonPath` and `JsonPathError` with expression and error-position context.
+- JSONPath tests covering nested objects, arrays, wildcards, escaping, missing values, invalid syntax, and immutability.
+
 ## [0.6.0] - 2026-07-28
 
 ### Added
@@ -85,7 +96,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - ESM, CommonJS, source map, and declaration builds
 - Vitest test suite
 
-[Unreleased]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.3.0...v0.4.0

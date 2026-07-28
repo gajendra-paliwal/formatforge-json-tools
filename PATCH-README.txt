@@ -1,24 +1,16 @@
-FormatForge JSON Tools v0.6.0 — JSON Pointer (RFC 6901)
+FormatForge JSON Tools v0.7.0 JSONPath position test hotfix
 
-Merge-safe patch for an existing v0.5.0 repository.
+Replace:
+  tests/path.test.ts
 
-Added:
-- src/pointer/pointer.ts
-- src/pointer/index.ts
-- tests/pointer.test.ts
+Reason:
+The parser reports token positions at the selector content. In
+$.store[0]["name"], the opening quote for the quoted property is at
+zero-based position 11. The previous test incorrectly expected the
+opening bracket position 10.
 
-Updated:
-- src/index.ts
-- package.json
-- package-lock.json
-- README.md
-- CHANGELOG.md
+No production source file is changed.
 
-Apply:
-1. Extract this ZIP into the repository root.
-2. Replace matching files when prompted.
-3. Run: npm install
-4. Run: npm run check
-5. Run: npm audit
-
-The patch excludes .git, node_modules, and dist.
+Run:
+  npm run check
+  npm audit

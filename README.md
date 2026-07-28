@@ -18,6 +18,7 @@ Fast, lightweight TypeScript utilities for formatting, validating, and transform
 - Recursively sort object keys while preserving array order
 - Remove configurable empty values from nested JSON
 - Read and immutably update JSON using RFC 6901 JSON Pointers
+- Query JSON using a safe, dependency-free JSONPath subset
 - Choose indentation from 0 to 10 spaces
 - Recursively sort object keys while preserving array order
 - ESM and CommonJS builds
@@ -343,9 +344,57 @@ npm run build
 npm run dev
 ```
 
+
+## JSONPath queries
+
+Query nested JSON without `eval` or runtime dependencies. Version 0.7.0 supports the root selector, dot properties, quoted bracket properties, array indexes, and object/array wildcards.
+
+```ts
+import { exists, find, first, query, select } from "@formatforge/json-tools";
+
+const data = {
+  users: [
+    { name: "Asha", role: "admin" },
+    { name: "David", role: "editor" }
+  ]
+};
+
+query(data, "$.users[*].name");
+// ["Asha", "David"]
+
+first(data, "$.users[*].role");
+// "admin"
+
+exists(data, "$.users[1]");
+// true
+
+select(data, "$.users[*].name");
+// [
+//   { pointer: "/users/0/name", value: "Asha" },
+//   { pointer: "/users/1/name", value: "David" }
+// ]
+
+find(data, "$.users[*].name");
+// { pointer: "/users/0/name", value: "Asha" }
+```
+
+Supported selectors:
+
+```text
+$
+$.user.name
+$.orders[0]
+$.orders[*].price
+$.*
+$["property.with.dots"]
+$['property/with/slashes']
+```
+
+Not supported in this release: recursive descent, filters, slices, unions, negative indexes, and script expressions. Missing properties and out-of-range indexes return no matches; malformed expressions throw `JsonPathError`. Match pointers use RFC 6901 escaping.
+
 ## Roadmap
 
-Planned capabilities include minification, structural comparison, JSON diffing, JSONPath helpers, and schema utilities.
+Planned capabilities include JSON Schema inference and validation, canonical JSON, stable stringification, benchmarks, and expanded JSONPath selectors.
 
 ## Browser tool
 

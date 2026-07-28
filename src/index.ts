@@ -64,3 +64,14 @@ export {
   unescapePointer,
   type ListPointersOptions
 } from "./pointer";
+
+export {
+  exists,
+  find,
+  first,
+  JsonPathError,
+  parseJsonPath,
+  query,
+  select,
+  type JsonPathMatch
+} from "./path";
