@@ -11,6 +11,8 @@ Fast, lightweight TypeScript utilities for formatting, validating, and transform
 ## Features
 
 - Format JSON strings and JavaScript values
+- Validate JSON without throwing
+- Parse JSON with line, column, and character-position errors
 - Choose indentation from 0 to 10 spaces
 - Recursively sort object keys while preserving array order
 - ESM and CommonJS builds
@@ -87,6 +89,66 @@ Sorting is recursive for objects. Array item order is never changed.
 - `TypeError` when the root value cannot be represented as a JSON document
 - Native `JSON.stringify` errors for unsupported structures such as circular references or `BigInt`
 
+### `isValidJson(input)`
+
+Returns `true` when the input contains one complete JSON document.
+
+```ts
+import { isValidJson } from "@formatforge/json-tools";
+
+isValidJson('{"name":"FormatForge"}'); // true
+isValidJson('{"name":}'); // false
+```
+
+### `parseJson(input)`
+
+Parses JSON and throws `JsonParseError` with `line`, `column`, and `position` when parsing fails.
+
+```ts
+import { JsonParseError, parseJson } from "@formatforge/json-tools";
+
+try {
+  const value = parseJson<{ name: string }>('{"name":"FormatForge"}');
+  console.log(value.name);
+} catch (error) {
+  if (error instanceof JsonParseError) {
+    console.error(error.line, error.column, error.message);
+  }
+}
+```
+
+### `validateJson(input)`
+
+Validates and parses JSON without throwing for malformed input. The return value is a discriminated union.
+
+```ts
+import { validateJson } from "@formatforge/json-tools";
+
+const result = validateJson('{"name":}');
+
+if (!result.valid) {
+  console.log(result.error.line);
+  console.log(result.error.column);
+  console.log(result.error.message);
+}
+```
+
+Success result:
+
+```ts
+{ valid: true, value: unknown, error: null }
+```
+
+Failure result:
+
+```ts
+{
+  valid: false,
+  value: null,
+  error: { message: string, position: number, line: number, column: number }
+}
+```
+
 ## Package formats
 
 The package provides:
@@ -113,7 +175,7 @@ npm run dev
 
 ## Roadmap
 
-Planned capabilities include JSON validation, minification, flattening and unflattening, key sorting utilities, and structural comparison.
+Planned capabilities include minification, flattening and unflattening, key sorting utilities, and structural comparison.
 
 ## Browser tool
 
