@@ -1,0 +1,72 @@
+{
+  "name": "@formatforge/json-tools",
+  "version": "0.1.0",
+  "description": "Fast, lightweight TypeScript utilities for JSON formatting, validation, transformation, and browser-friendly data processing.",
+  "keywords": [
+    "json",
+    "typescript",
+    "javascript",
+    "formatter",
+    "validator",
+    "flatten",
+    "unflatten",
+    "browser",
+    "nodejs",
+    "formatforge"
+  ],
+  "license": "MIT",
+  "author": "Gajendra Paliwal",
+  "homepage": "https://formatforge.in/tools/json-studio",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gajendra-paliwal/formatforge-json-tools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gajendra-paliwal/formatforge-json-tools/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run typecheck && npm run test && npm run build",
+    "prepublishOnly": "npm run check"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.2",
+    "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "esbuild": "0.28.1"
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true
+  }
+}
