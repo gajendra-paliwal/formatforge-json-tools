@@ -1,6 +1,6 @@
 {
   "name": "@formatforge/json-tools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fast, lightweight TypeScript utilities for JSON formatting, validation, transformation, comparison, patching, pointers, JSONPath queries, JSON Schema, and deterministic serialization.",
   "keywords": [
     "json",
