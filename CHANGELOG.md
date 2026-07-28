@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-07-28
+
+### Added
+
+- `isDeepEqual` for structural JSON equality with order-insensitive object keys and order-sensitive arrays
+- `diffJson` with deterministic RFC 6901 JSON Pointer paths and added, removed, and changed records
+- `compareJson` with difference records and summary counts
+- Configurable `maxDifferences` limit for large comparisons
+- Compare test suite covering nested objects, arrays, escaped paths, root changes, invalid inputs, and result limits
+
 ## [0.3.0] - 2026-07-28
 
 ### Added
@@ -51,7 +61,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - ESM, CommonJS, source map, and declaration builds
 - Vitest test suite
 
-[Unreleased]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/gajendra-paliwal/formatforge-json-tools/compare/v0.1.0...v0.1.1

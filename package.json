@@ -1,6 +1,6 @@
 {
   "name": "@formatforge/json-tools",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Fast, lightweight TypeScript utilities for JSON formatting, validation, transformation, and browser-friendly data processing.",
   "keywords": [
     "json",
@@ -12,7 +12,9 @@
     "unflatten",
     "browser",
     "nodejs",
-    "formatforge"
+    "formatforge",
+    "diff",
+    "compare"
   ],
   "license": "MIT",
   "author": "Gajendra Paliwal",

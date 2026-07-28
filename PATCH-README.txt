@@ -1,39 +1,55 @@
-FormatForge JSON Tools v0.3.0 - Merge-Safe Transform Patch
+FormatForge JSON Tools v0.4.0 — Compare & Diff Merge-Safe Patch
+================================================================
 
-Baseline:
-- Apply to the committed v0.2.0 repository.
+Baseline: committed v0.3.0 release
 
-How to apply:
-1. Extract this ZIP into the repository root.
-2. Allow files with matching paths to be replaced.
-3. Run:
-     npm install
-     npm run check
-     npm audit
+Copy this patch into the repository root and replace matching files.
+The patch does not contain .git, node_modules, or dist.
 
-Expected project state:
-- Package version: 0.3.0
-- Existing formatter and validator code remains unchanged.
-- New APIs:
-  flattenJson
-  unflattenJson
-  deepClone
-  deepMerge
-  sortJsonKeys
-  removeEmpty
-- New exported types:
-  JsonPrimitive
-  JsonValue
-  JsonObject
+New APIs
+--------
+- isDeepEqual(left, right)
+- diffJson(left, right, options?)
+- compareJson(left, right, options?)
 
-Patch files only:
+Highlights
+----------
+- Deterministic added, removed, and changed differences
+- RFC 6901 JSON Pointer paths
+- Correct escaping for '/' and '~' in property names
+- Object property order ignored
+- Array order preserved and compared
+- Root-value differences supported
+- Optional maxDifferences safety limit
+- Non-JSON and circular inputs rejected
+- Summary counts from compareJson
+
+Files added
+-----------
+- src/compare/compare.ts
+- src/compare/index.ts
+- tests/compare.test.ts
+
+Files updated
+-------------
+- src/index.ts
 - package.json
 - package-lock.json
 - README.md
 - CHANGELOG.md
-- src/index.ts
-- src/types/json.ts
-- src/transform/*.ts
-- tests/transform.test.ts
 
-No .git, node_modules, or dist files are included.
+Validation
+----------
+TypeScript compilation was checked successfully with:
+  tsc --noEmit
+
+Run locally after applying:
+  npm install
+  npm run check
+  npm audit
+
+Expected:
+- 47 total tests (based on v0.3.0 baseline)
+- TypeScript pass
+- ESM/CJS/DTS build pass
+- 0 vulnerabilities

@@ -245,6 +245,48 @@ removeEmpty({
 
 Configure individual behaviours with `removeNull`, `removeEmptyStrings`, `removeEmptyArrays`, `removeEmptyObjects`, and `trimStrings`.
 
+## Compare and diff
+
+### `isDeepEqual(left, right)`
+
+Performs structural equality for JSON-compatible values. Object key order is ignored, while array order remains significant.
+
+```ts
+import { isDeepEqual } from "@formatforge/json-tools";
+
+isDeepEqual({ a: 1, b: 2 }, { b: 2, a: 1 }); // true
+isDeepEqual([1, 2], [2, 1]); // false
+```
+
+### `diffJson(left, right, options?)`
+
+Returns deterministic added, removed, and changed entries. Paths follow RFC 6901 JSON Pointer syntax.
+
+```ts
+import { diffJson } from "@formatforge/json-tools";
+
+diffJson(
+  { name: "Asha", active: false },
+  { name: "Asha", active: true, role: "admin" }
+);
+// [
+//   { type: "changed", path: "/active", left: false, right: true },
+//   { type: "added", path: "/role", right: "admin" }
+// ]
+```
+
+Use `{ maxDifferences: 100 }` to stop collecting after a chosen number of differences.
+
+### `compareJson(left, right, options?)`
+
+Returns the same difference list with `equal`, `added`, `removed`, and `changed` summary fields.
+
+```ts
+const result = compareJson({ total: 10 }, { total: 12 });
+// result.equal === false
+// result.changed === 1
+```
+
 ## Package formats
 
 The package provides:
