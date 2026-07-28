@@ -13,6 +13,10 @@ Fast, lightweight TypeScript utilities for formatting, validating, and transform
 - Format JSON strings and JavaScript values
 - Validate JSON without throwing
 - Parse JSON with line, column, and character-position errors
+- Flatten and unflatten nested objects and arrays with escaped paths
+- Deep clone and merge JSON-compatible data without mutation
+- Recursively sort object keys while preserving array order
+- Remove configurable empty values from nested JSON
 - Choose indentation from 0 to 10 spaces
 - Recursively sort object keys while preserving array order
 - ESM and CommonJS builds
@@ -149,6 +153,98 @@ Failure result:
 }
 ```
 
+
+### `flattenJson(input, options?)`
+
+Converts nested JSON into path/value pairs. Object keys use dot notation, arrays use bracket indexes, and reserved path characters are escaped.
+
+```ts
+import { flattenJson } from "@formatforge/json-tools";
+
+flattenJson({
+  customer: {
+    name: "Asha",
+    orders: [{ id: 101 }]
+  }
+});
+```
+
+Output:
+
+```ts
+{
+  "customer.name": "Asha",
+  "customer.orders[0].id": 101
+}
+```
+
+Use `{ delimiter: "/" }` to choose a different single-character object-key delimiter. Primitive and empty root values use the empty path (`""`). Empty object keys are rejected because they cannot be represented unambiguously.
+
+### `unflattenJson(input, options?)`
+
+Restores data produced by `flattenJson`. It rejects malformed paths, conflicting assignments, sparse arrays, and prototype-pollution keys.
+
+```ts
+import { unflattenJson } from "@formatforge/json-tools";
+
+unflattenJson({
+  "customer.name": "Asha",
+  "customer.orders[0].id": 101
+});
+```
+
+### `deepClone(input)`
+
+Creates an independent recursive clone of a JSON-compatible value.
+
+```ts
+const cloned = deepClone({ profile: { tags: ["json"] } });
+```
+
+Non-JSON values such as `Date`, functions, symbols, circular references, `NaN`, and `Infinity` are rejected.
+
+### `deepMerge(target, source, options?)`
+
+Recursively merges two JSON objects without mutating either input. Arrays are replaced by default.
+
+```ts
+const merged = deepMerge(
+  { profile: { name: "Asha" }, tags: ["json"] },
+  { profile: { active: true }, tags: ["tools"] }
+);
+```
+
+Concatenate arrays when needed:
+
+```ts
+deepMerge(left, right, { arrayStrategy: "concat" });
+```
+
+### `sortJsonKeys(input, options?)`
+
+Returns a recursively key-sorted clone while preserving array item order.
+
+```ts
+sortJsonKeys({ z: 1, a: { y: 2, b: 3 } });
+```
+
+A custom key comparator can be provided through the `compare` option.
+
+### `removeEmpty(input, options?)`
+
+Recursively removes empty nested values without mutating the input. By default it removes `null`, empty strings, empty arrays, and empty objects.
+
+```ts
+removeEmpty({
+  name: "FormatForge",
+  note: "",
+  metadata: {},
+  tags: ["json", null]
+});
+```
+
+Configure individual behaviours with `removeNull`, `removeEmptyStrings`, `removeEmptyArrays`, `removeEmptyObjects`, and `trimStrings`.
+
 ## Package formats
 
 The package provides:
@@ -175,7 +271,7 @@ npm run dev
 
 ## Roadmap
 
-Planned capabilities include minification, flattening and unflattening, key sorting utilities, and structural comparison.
+Planned capabilities include minification, structural comparison, JSON diffing, JSONPath helpers, and schema utilities.
 
 ## Browser tool
 

@@ -11,3 +11,20 @@ export {
   type JsonValidationError,
   type JsonValidationResult
 } from "./validator/validate";
+
+export {
+  deepClone,
+  deepMerge,
+  flattenJson,
+  removeEmpty,
+  sortJsonKeys,
+  unflattenJson,
+  type DeepMergeOptions,
+  type FlattenedJson,
+  type FlattenJsonOptions,
+  type RemoveEmptyOptions,
+  type SortJsonKeysOptions,
+  type UnflattenJsonOptions
+} from "./transform";
+
+export type { JsonObject, JsonPrimitive, JsonValue } from "./types/json";
